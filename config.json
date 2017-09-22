@@ -1,0 +1,25 @@
+{
+    "begin": 0,
+    "target": -85,
+    "methods": [{
+            "type": "add",
+            "value": 6
+        },
+        {
+            "type": "minus",
+            "value": 7
+        },
+        {
+            "type": "delete"
+        },
+        {
+            "type": "input",
+            "value": "5"
+        },
+        {
+            "type": "convert",
+            "from": 2,
+            "to": 1
+        }
+    ]
+}
