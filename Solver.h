@@ -5,6 +5,7 @@
 #include <iostream>
 #include <fstream>
 #include <memory>
+#include <utility>
 
 class Solver;
 class SolverConfig;
@@ -14,7 +15,8 @@ using namespace rapidjson;
 
 class SolverConfig {
 private:
-	SolverConfig() {};
+	SolverConfig() = default;
+
 	int begin;
 	int target;
 	std::vector<_unary::Unary *> runnerList;
@@ -47,7 +49,7 @@ class Solver {
 private:
 	config_ptr config;
 public:
-	Solver(config_ptr config) {
+	explicit Solver(config_ptr config) {
 		this->config = config;
 	}
 

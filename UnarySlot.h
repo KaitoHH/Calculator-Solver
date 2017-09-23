@@ -5,7 +5,6 @@
 #include <algorithm>
 #include <iostream>
 
-std::map<int, int> mp;
 namespace _unary {
 	class UnaryFactory;
 
