@@ -1,25 +1,31 @@
 {
-    "begin": 0,
-    "target": -85,
-    "methods": [{
-            "type": "add",
-            "value": 6
-        },
-        {
-            "type": "minus",
-            "value": 7
-        },
-        {
-            "type": "delete"
-        },
-        {
-            "type": "input",
-            "value": "5"
-        },
-        {
-            "type": "convert",
-            "from": 2,
-            "to": 1
-        }
-    ]
+  "begin": 2,
+  "target": 15,
+  "methods": [
+    {
+      "type": "multi",
+      "param": [
+        2
+      ]
+    },
+    {
+      "type": "div",
+      "param": [
+        3
+      ]
+    },
+    {
+      "type": "input",
+      "param": [
+        1
+      ]
+    },
+    {
+      "type": "convert",
+      "param": [
+        4,
+        5
+      ]
+    }
+  ]
 }
