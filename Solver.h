@@ -5,7 +5,6 @@
 #include <iostream>
 #include <fstream>
 #include <memory>
-#include <utility>
 
 class Solver;
 class SolverConfig;
@@ -19,7 +18,7 @@ private:
 
 	int begin;
 	int target;
-	std::vector<_unary::Unary *> runnerList;
+	std::vector<std::shared_ptr<_unary::Unary>> runnerList;
 	friend Solver;
 
 public:
@@ -38,7 +37,8 @@ public:
 			if (x.FindMember("param") != x.MemberEnd())
 				for (auto &y:x["param"].GetArray())
 					argList.push_back(y.GetInt());
-			config->runnerList.push_back(_unary::UnaryFactory::createUnaryFunction(x["type"].GetString(), argList));
+			config->runnerList.emplace_back(
+					_unary::UnaryFactory::createUnaryFunction(x["type"].GetString(), argList));
 		}
 
 		return config;

@@ -83,6 +83,10 @@ public:
 	explicit DivUnary(int arg) : SingleArgUnary(arg) {}
 
 	int calc(int num) override {
+		// stub for invalid operation
+		if (num % arg) {
+			return 999;
+		}
 		return num / arg;
 	}
 
