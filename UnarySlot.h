@@ -19,6 +19,7 @@ namespace _unary {
 	class InputUnary;
 	class ConvertUnary;
 	class ReverseUnary;
+	class SumUnary;
 
 	typedef Unary *(*UnaryFactoryFunc)(const std::vector<int> &);
 
@@ -148,6 +149,17 @@ public:
 	}
 };
 
+class _unary::SumUnary : public _unary::Unary {
+public:
+	int calc(int num) override {
+		int sum = 0;
+		while (num) {
+			sum += num % 10;
+			num /= 10;
+		}
+		return sum;
+	}
+};
 class _unary::UnaryFactory {
 public:
 	static Unary *createUnaryFunction(const char *method, const std::vector<int> &array) {
@@ -186,6 +198,10 @@ public:
 	static Unary *createReverseFunction(const std::vector<int> &array) {
 		return new ReverseUnary();
 	}
+
+	static Unary *createSumFunction(const std::vector<int> &array) {
+		return new SumUnary();
+	}
 };
 
 
@@ -202,5 +218,6 @@ _unary::UnaryMap _unary::funcMap = ([]() -> _unary::UnaryMap & {
 	funcMap["<<"] = UnaryFactory::createDelFunction;
 	funcMap["=>"] = UnaryFactory::createConvertFunction;
 	funcMap["r"] = UnaryFactory::createReverseFunction;
+	funcMap["s"] = UnaryFactory::createSumFunction;
 	return funcMap;
 })();
