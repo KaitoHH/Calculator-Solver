@@ -167,12 +167,14 @@ public:
 _unary::UnaryMap _unary::funcMap = ([]() -> _unary::UnaryMap & {
 	using namespace _unary;
 	static UnaryMap funcMap;
-	funcMap["add"] = UnaryFactory::createAddFunction;
-	funcMap["minus"] = UnaryFactory::createMinusFunction;
-	funcMap["multi"] = UnaryFactory::createMultiFunction;
-	funcMap["div"] = UnaryFactory::createDivFunction;
-	funcMap["input"] = UnaryFactory::createInputFunction;
-	funcMap["delete"] = UnaryFactory::createDelFunction;
-	funcMap["convert"] = UnaryFactory::createConvertFunction;
+	funcMap["+"] = UnaryFactory::createAddFunction;
+	funcMap["++"] = UnaryFactory::createAddFunction;
+	funcMap["-"] = UnaryFactory::createMinusFunction;
+	funcMap["--"] = UnaryFactory::createMinusFunction;
+	funcMap["*"] = UnaryFactory::createMultiFunction;
+	funcMap["/"] = UnaryFactory::createDivFunction;
+	funcMap["in"] = UnaryFactory::createInputFunction;
+	funcMap["<<"] = UnaryFactory::createDelFunction;
+	funcMap["->"] = UnaryFactory::createConvertFunction;
 	return funcMap;
 })();

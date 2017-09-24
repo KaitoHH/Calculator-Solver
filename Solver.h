@@ -25,6 +25,10 @@ public:
 	static config_ptr readConfigFromFile(const char *fileName) {
 		std::ifstream ifs(fileName);
 		std::string content((std::istreambuf_iterator<char>(ifs)), (std::istreambuf_iterator<char>()));
+		return readConfigFromJson(content);
+	}
+
+	static config_ptr readConfigFromJson(const std::string &content) {
 		Document document;
 		document.Parse(content.c_str());
 
@@ -41,6 +45,22 @@ public:
 					_unary::UnaryFactory::createUnaryFunction(x["type"].GetString(), argList));
 		}
 
+		return config;
+	}
+
+	static config_ptr readConfigFromStream(std::istream &in) {
+		config_ptr config(new SolverConfig());
+		in >> config->begin >> config->target;
+		std::string type;
+		while (in >> type) {
+			if (type == ".") break;
+			int arg;
+			std::vector<int> argList;
+			while (in >> arg) argList.push_back(arg);
+			config->runnerList.emplace_back(
+					_unary::UnaryFactory::createUnaryFunction(type.c_str(), argList));
+			in.clear();
+		}
 		return config;
 	}
 };

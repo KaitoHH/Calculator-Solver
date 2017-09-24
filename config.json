@@ -3,19 +3,19 @@
   "target": 13,
   "methods": [
     {
-      "type": "add",
+      "type": "+",
       "param": [
         9
       ]
     },
     {
-      "type": "delete",
+      "type": "-",
       "param": [
         8
       ]
     },
     {
-      "type": "multi",
+      "type": "*",
       "param": [
         -1
       ]
