@@ -18,6 +18,7 @@ namespace _unary {
 	class DelUnary;
 	class InputUnary;
 	class ConvertUnary;
+	class ReverseUnary;
 
 	typedef Unary *(*UnaryFactoryFunc)(const std::vector<int> &);
 
@@ -127,6 +128,16 @@ public:
 
 };
 
+class _unary::ReverseUnary : public _unary::Unary {
+public:
+	int calc(int num) override {
+		// not efficient, but simple
+		std::string num_string = std::to_string(num);
+		std::reverse(num_string.begin(), num_string.end());
+		return std::stoi(num_string);
+	}
+};
+
 class _unary::UnaryFactory {
 public:
 	static Unary *createUnaryFunction(const char *method, const std::vector<int> &array) {
@@ -161,6 +172,10 @@ public:
 	static Unary *createConvertFunction(const std::vector<int> &array) {
 		return new ConvertUnary(array[0], array[1]);
 	}
+
+	static Unary *createReverseFunction(const std::vector<int> &array) {
+		return new ReverseUnary();
+	}
 };
 
 
@@ -176,5 +191,6 @@ _unary::UnaryMap _unary::funcMap = ([]() -> _unary::UnaryMap & {
 	funcMap["in"] = UnaryFactory::createInputFunction;
 	funcMap["<<"] = UnaryFactory::createDelFunction;
 	funcMap["->"] = UnaryFactory::createConvertFunction;
+	funcMap["r"] = UnaryFactory::createReverseFunction;
 	return funcMap;
 })();
