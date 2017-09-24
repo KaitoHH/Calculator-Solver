@@ -121,9 +121,19 @@ public:
 	ConvertUnary(int arg, int arg2) : DoubleArgUnary(arg, arg2) {}
 
 	int calc(int num) override {
+		// not efficient, but simple
 		std::string temp = std::to_string(num);
-		std::replace(temp.begin(), temp.end(), arg + '0', arg2 + '0');
-		return std::stoi(temp);
+		temp = ReplaceAll(temp, std::to_string(arg), std::to_string(arg2));
+		return std::stoll(temp);
+	}
+
+	static std::string ReplaceAll(std::string str, const std::string &from, const std::string &to) {
+		size_t start_pos = 0;
+		while ((start_pos = str.find(from, start_pos)) != std::string::npos) {
+			str.replace(start_pos, from.length(), to);
+			start_pos += to.length();
+		}
+		return str;
 	}
 
 };
@@ -134,7 +144,7 @@ public:
 		// not efficient, but simple
 		std::string num_string = std::to_string(num);
 		std::reverse(num_string.begin(), num_string.end());
-		return std::stoi(num_string);
+		return std::stoll(num_string) * (num < 0 ? -1 : 1);
 	}
 };
 
@@ -190,7 +200,7 @@ _unary::UnaryMap _unary::funcMap = ([]() -> _unary::UnaryMap & {
 	funcMap["/"] = UnaryFactory::createDivFunction;
 	funcMap["in"] = UnaryFactory::createInputFunction;
 	funcMap["<<"] = UnaryFactory::createDelFunction;
-	funcMap["->"] = UnaryFactory::createConvertFunction;
+	funcMap["=>"] = UnaryFactory::createConvertFunction;
 	funcMap["r"] = UnaryFactory::createReverseFunction;
 	return funcMap;
 })();
