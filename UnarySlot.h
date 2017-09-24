@@ -20,6 +20,9 @@ namespace _unary {
 	class ConvertUnary;
 	class ReverseUnary;
 	class SumUnary;
+	class PowUnary;
+	class RShiftUnary;
+	class LShiftUnary;
 
 	typedef Unary *(*UnaryFactoryFunc)(const std::vector<int> &);
 
@@ -160,6 +163,49 @@ public:
 		return sum;
 	}
 };
+
+class _unary::LShiftUnary : public _unary::Unary {
+public:
+	int calc(int num) override {
+		int old = num;
+		int temp = 1;
+		int last = 0;
+		while (num) {
+			last = num % 10;
+			temp *= 10;
+			num /= 10;
+		}
+		return (old * 10 - temp * last) + last;
+	}
+};
+
+class _unary::RShiftUnary : public _unary::Unary {
+public:
+	int calc(int num) override {
+		int old = num;
+		int temp = 1;
+		int last = num % 10;
+		while (num) {
+			temp *= 10;
+			num /= 10;
+		}
+		return old / 10 + last * temp / 10;
+	}
+};
+
+class _unary::PowUnary : public _unary::SingleArgUnary {
+public:
+	explicit PowUnary(int arg) : SingleArgUnary(arg) {}
+
+	int calc(int num) override {
+		int ans = 1;
+		for (int i = 1; i <= arg; i++) {
+			ans *= num;
+		}
+		return ans;
+	}
+};
+
 class _unary::UnaryFactory {
 public:
 	static Unary *createUnaryFunction(const char *method, const std::vector<int> &array) {
@@ -202,6 +248,18 @@ public:
 	static Unary *createSumFunction(const std::vector<int> &array) {
 		return new SumUnary();
 	}
+
+	static Unary *createPowFunction(const std::vector<int> &array) {
+		return new PowUnary(array[0]);
+	}
+
+	static Unary *createRShiftFunction(const std::vector<int> &array) {
+		return new RShiftUnary();
+	}
+
+	static Unary *createLShiftFunction(const std::vector<int> &array) {
+		return new LShiftUnary();
+	}
 };
 
 
@@ -219,5 +277,8 @@ _unary::UnaryMap _unary::funcMap = ([]() -> _unary::UnaryMap & {
 	funcMap["=>"] = UnaryFactory::createConvertFunction;
 	funcMap["r"] = UnaryFactory::createReverseFunction;
 	funcMap["s"] = UnaryFactory::createSumFunction;
+	funcMap["^"] = UnaryFactory::createPowFunction;
+	funcMap[">"] = UnaryFactory::createRShiftFunction;
+	funcMap["<"] = UnaryFactory::createLShiftFunction;
 	return funcMap;
 })();
