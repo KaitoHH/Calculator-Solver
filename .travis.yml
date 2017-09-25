@@ -6,5 +6,7 @@ addons:
     packages:
       - g++-4.9
       - gcc-4.9
+install:
+  - svn checkout https://github.com/Tencent/rapidjson/trunk/include/rapidjson
 script:
   - g++-4.9 main.cpp Solver.h UnarySlot.h -std=c++11
