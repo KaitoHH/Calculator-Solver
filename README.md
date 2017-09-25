@@ -2,6 +2,7 @@
 
 [![Build Status](https://semaphoreci.com/api/v1/kaitohh/calculator-solver/branches/master/shields_badge.svg)](https://semaphoreci.com/kaitohh/calculator-solver)
 [![GitHub version](https://badge.fury.io/gh/KaitoHH%2FCalculator-Solver.svg)](https://badge.fury.io/gh/KaitoHH%2FCalculator-Solver)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/374afaf73d85427e8f9b58ff6f23dcb0)](https://www.codacy.com/app/KaitoHH/Calculator-Solver?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=KaitoHH/Calculator-Solver&amp;utm_campaign=Badge_Grade)
 
 Program for solving [Calculator: The Game](https://itunes.apple.com/us/app/calculator-the-game/id1243055750) - a game of using calculator to solve various number puzzles. 
 
