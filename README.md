@@ -1,4 +1,7 @@
 # Calculator-Solver
+
+[![Build Status](https://travis-ci.org/KaitoHH/Calculator-Solver.svg?branch=master)](https://travis-ci.org/KaitoHH/Calculator-Solver)
+
 Program for solving [Calculator: The Game](https://itunes.apple.com/us/app/calculator-the-game/id1243055750) - a game of using calculator to solve various number puzzles. 
 
 This game is very suitable for practising your programming skill, from not only your ability to write an algorithm that performs well, but also your ability to refactor your code, keep your code tidy and extensible with the game going on, which is more important in this project.
