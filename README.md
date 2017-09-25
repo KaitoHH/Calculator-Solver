@@ -1,6 +1,7 @@
 # Calculator-Solver
 
-[![Build Status](https://travis-ci.org/KaitoHH/Calculator-Solver.svg?branch=master)](https://travis-ci.org/KaitoHH/Calculator-Solver)
+[![Build Status](https://semaphoreci.com/api/v1/kaitohh/calculator-solver/branches/master/shields_badge.svg)](https://semaphoreci.com/kaitohh/calculator-solver)
+[![GitHub version](https://badge.fury.io/gh/KaitoHH%2FCalculator-Solver.svg)](https://badge.fury.io/gh/KaitoHH%2FCalculator-Solver)
 
 Program for solving [Calculator: The Game](https://itunes.apple.com/us/app/calculator-the-game/id1243055750) - a game of using calculator to solve various number puzzles. 
 
@@ -12,4 +13,4 @@ I write this program just for fun, a good suggestion is that you can first downl
  What I do in solving this game is use a design pattern called [Strategy Pattern](https://en.wikipedia.org/wiki/Strategy_pattern) to make my program extensible and simply use [Breadth First Search](https://en.wikipedia.org/wiki/Breadth-first_search) to find the solution. I've also used many C++11 features like lambda expression, smarter pointer to practise my C++ skills. Finally, I use a json format file to give my program game config of each level.
  
 ## Built with
-- [RapidJSON](http://rapidjson.org/) - a fast json parser
+- [RapidJSON](http://rapidjson.org/) [![GitHub version](https://badge.fury.io/gh/Tencent%2Frapidjson.svg)](https://badge.fury.io/gh/Tencent%2Frapidjson) - a fast json parser
