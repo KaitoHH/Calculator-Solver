@@ -23,6 +23,7 @@ namespace _unary {
 	class PowUnary;
 	class RShiftUnary;
 	class LShiftUnary;
+	class MirrorUnary;
 
 	typedef Unary *(*UnaryFactoryFunc)(const std::vector<int> &);
 
@@ -30,6 +31,7 @@ namespace _unary {
 
 	extern UnaryMap funcMap;
 
+	const int IMPOSSIBLE_VALUE = -1u >> 1;
 }
 
 class _unary::Unary {
@@ -88,9 +90,8 @@ public:
 	explicit DivUnary(int arg) : SingleArgUnary(arg) {}
 
 	int calc(int num) override {
-		// stub for invalid operation
 		if (num % arg) {
-			return 999;
+			return IMPOSSIBLE_VALUE;
 		}
 		return num / arg;
 	}
@@ -206,6 +207,20 @@ public:
 	}
 };
 
+class _unary::MirrorUnary : public _unary::Unary {
+public:
+	int calc(int num) override {
+		std::string s1 = std::to_string(num);
+		std::string rs = s1;
+		std::reverse(rs.begin(), rs.end());
+		std::string ans = s1 + rs;
+		if (ans.length() >= 7) {
+			return IMPOSSIBLE_VALUE;
+		}
+		return std::stoll(ans);
+	}
+};
+
 class _unary::UnaryFactory {
 public:
 	static Unary *createUnaryFunction(const char *method, const std::vector<int> &array) {
@@ -260,6 +275,10 @@ public:
 	static Unary *createLShiftFunction(const std::vector<int> &array) {
 		return new LShiftUnary();
 	}
+
+	static Unary *createMirrorFunction(const std::vector<int> &array) {
+		return new MirrorUnary();
+	}
 };
 
 
@@ -280,5 +299,6 @@ _unary::UnaryMap _unary::funcMap = ([]() -> _unary::UnaryMap & {
 	funcMap["^"] = UnaryFactory::createPowFunction;
 	funcMap[">"] = UnaryFactory::createRShiftFunction;
 	funcMap["<"] = UnaryFactory::createLShiftFunction;
+	funcMap["m"] = UnaryFactory::createMirrorFunction;
 	return funcMap;
 })();

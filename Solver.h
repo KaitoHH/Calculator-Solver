@@ -87,6 +87,7 @@ public:
 			q.pop();
 			for (auto &f : config->runnerList) {
 				int new_cur = f->calc(cur);
+				if (new_cur == _unary::IMPOSSIBLE_VALUE) continue;
 				if (vis.find(new_cur) == vis.end()) {
 					fa[new_cur] = cur;
 					vis.insert(new_cur);
